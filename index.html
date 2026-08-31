@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercado Laboral - DANE Julio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:12px;color:#222}
+.card{background:#fff;border-radius:16px;max-width:520px;margin:0 auto;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.header{background:#c8102e;padding:18px 20px}
+.header h1{color:#fff;font-size:16px;font-weight:700}
+.header p{color:rgba(255,255,255,.8);font-size:12px;margin-top:2px}
+
+/* Navegación por pestañas */
+.tabs-nav{display:flex;overflow-x:auto;background:#f8f9fa;border-bottom:1px solid #e9ecef;scrollbar-width:none}
+.tabs-nav::-webkit-scrollbar{display:none}
+.tab-btn{flex:0 0 auto;padding:12px 14px;font-size:11px;font-weight:600;color:#6c757d;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab-btn.active{color:#c8102e;border-bottom-color:#c8102e;background:#fff}
+
+.body{padding:18px}
+.section-title{font-size:12px;font-weight:700;color:#111;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+
+/* Tarjetas KPI */
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.kpi-card{background:#f8f9fa;border:1px solid #e9ecef;border-radius:10px;padding:12px;text-align:center}
+.kpi-val{font-size:24px;font-weight:700;color:#111;line-height:1}
+.kpi-lbl{font-size:11px;color:#6c757d;margin-top:4px;font-weight:500}
+.badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-top:6px}
+.bg-green{background:#d1e7dd;color:#0f5132}
+.bg-red{background:#f8d7da;color:#842029}
+
+/* Gráficos de Lista Vertical */
+.sector-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.sector-item{display:flex;flex-direction:column;gap:3px;background:#f8f9fa;border:1px solid #f1f3f5;padding:8px 10px;border-radius:8px}
+.sector-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;line-height:1.2}
+.sector-name{color:#222;padding-right:8px}
+.sector-val{font-weight:700;white-space:nowrap}
+.val-pos{color:#198754}
+.val-neg{color:#dc3545}
+
+.bar-track{height:8px;background:#e9ecef;border-radius:4px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;transition:width .4s ease}
+.fill-green{background:#198754}
+.fill-red{background:#dc3545}
+.fill-blue{background:#0d6efd}
+.fill-gray{background:#6c757d}
+
+/* Comparativa Hombres vs Mujeres */
+.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.gender-box{padding:10px;border-radius:8px;border:1px solid #e9ecef;background:#fafafa;text-align:center}
+.gender-title{font-size:11px;font-weight:700;margin-bottom:4px}
+
+.footer{font-size:10px;color:#adb5bd;padding-top:12px;margin-top:12px;border-top:1px solid #f1f3f5;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <h1>Mercado Laboral en Colombia</h1>
+    <p>Resumen visual basado en las diapositivas DANE (Julio 2026)</p>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('t1', this)">1. Tasas</button>
+    <button class="tab-btn" onclick="switchTab('t2', this)">2. Población</button>
+    <button class="tab-btn" onclick="switchTab('t3', this)">3. Sectores</button>
+    <button class="tab-btn" onclick="switchTab('t4', this)">4. Género</button>
+    <button class="tab-btn" onclick="switchTab('t5', this)">5. Ciudades</button>
+    <button class="tab-btn" onclick="switchTab('t6', this)">6. Informalidad</button>
+    <button class="tab-btn" onclick="switchTab('t7', this)">7. Jóvenes</button>
+  </div>
+
+  <div class="body">
+
+    <!-- DIA 1: TASAS NACIONALES -->
+    <div id="t1">
+      <div class="section-title">Evolución de la Tasa de Desempleo (Julio)</div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-val">8,1%</div>
+          <div class="kpi-lbl">Desempleo Jul 2026</div>
+          <div class="badge bg-green">-0,7 p.p. vs 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">59,5%</div>
+          <div class="kpi-lbl">Tasa de Ocupación</div>
+          <div class="badge bg-green">+0,6 p.p. vs 2025</div>
+        </div>
+      </div>
+      
+      <div class="sector-list">
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Julio 2020 (Pandemia)</span><span class="sector-val">20,9%</span></div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width: 100%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Julio 2023</span><span class="sector-val">9,6%</span></div>
+          <div class="bar-track"><div class="bar-fill fill-gray" style="width: 46%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Julio 2025</span><span class="sector-val">8,8%</span></div>
+          <div class="bar-track"><div class="bar-fill fill-gray" style="width: 42%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Julio 2026 (Actual)</span><span class="sector-val">8,1%</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 38%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 2: POBLACIÓN -->
+    <div id="t2" style="display:none">
+      <div class="section-title">Distribución de la Población (en miles)</div>
+      <div class="sector-list">
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Ocupados (+578 mil)</span><span class="sector-val">24.547</span></div>
+          <div class="bar-track"><div class="bar-fill fill-blue" style="width: 60%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Fuera de la Fuerza Laboral (+131 mil)</span><span class="sector-val">14.530</span></div>
+          <div class="bar-track"><div class="bar-fill fill-gray" style="width: 35%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Desocupados (-160 mil)</span><span class="sector-val">2.165</span></div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width: 10%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 3: SECTORES -->
+    <div id="t3" style="display:none">
+      <div class="section-title">Variación de Ocupados por Sector (en miles)</div>
+      <div class="sector-list">
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Administración pública, salud y educación</span><span class="sector-val val-pos">+404</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 100%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Comercio y reparación de vehículos</span><span class="sector-val val-pos">+158</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 39%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Construcción</span><span class="sector-val val-pos">+156</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 38%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Industrias manufactureras</span><span class="sector-val val-pos">+82</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 20%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Información y comunicaciones</span><span class="sector-val val-pos">+65</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 16%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Actividades artísticas, entretenimiento y hogar</span><span class="sector-val val-pos">+48</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 12%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Actividades profesionales, científicas y técnicas</span><span class="sector-val val-pos">+31</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 8%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Actividades financieras y de seguros</span><span class="sector-val val-pos">+18</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 4%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Suministro de electricidad, gas, agua y desechos</span><span class="sector-val val-pos">+12</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 3%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Actividades inmobiliarias</span><span class="sector-val val-pos">+2</span></div>
+          <div class="bar-track"><div class="bar-fill fill-green" style="width: 1%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Alojamiento y servicios de comida</span><span class="sector-val val-neg">-61</span></div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width: 15%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Transporte y almacenamiento</span><span class="sector-val val-neg">-69</span></div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width: 17%;"></div></div>
+        </div>
+        <div class="sector-item">
+          <div class="sector-head"><span class="sector-name">Agricultura, ganadería, caza, silvicultura y pesca</span><span class="sector-val val-neg">-204</span></div>
+          <div class="bar-track"><div class="bar-fill fill-red" style="width: 50%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 4: GÉNERO -->
+    <div id="t4" style="display:none">
+      <div class="section-title">Nuevos Ocupados por Género (en miles)</div>
+      <div class="gender-grid">
+        <div class="gender-box">
+          <div class="gender-title" style="color:#0d6efd">Hombres</div>
+          <div style="font-size:18px;font-weight:700">+374</div>
+          <div style="font-size:10px;color:#666">Impulsado por Construcción (+176 mil)</div>
+        </div>
+        <div class="gender-box">
+          <div class="gender-title" style="color:#d63384">Mujeres</div>
+          <div style="font-size:18px;font-weight:700">+203</div>
+          <div style="font-size:10px;color:#666">Impulsado por Admin. Pública (+184 mil)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 5: CIUDADES (LISTADO COMPLETO 23 ÁREAS) -->
+    <div id="t5" style="display:none">
+      <div class="section-title">Desempleo por Ciudades (Trimestre Mayo - Julio 2026)</div>
+      <div class="sector-list">
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">1. Medellín A.M.</span><span class="sector-val">7,0%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 30%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">2. Bucaramanga A.M.</span><span class="sector-val">7,5%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 32%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">3. Santa Marta</span><span class="sector-val">7,8%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 34%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">4. Bogotá D.C.</span><span class="sector-val">8,0%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 35%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">5. Manizales A.M.</span><span class="sector-val">8,2%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 36%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">6. Pereira A.M.</span><span class="sector-val">8,5%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 37%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">7. Popayán</span><span class="sector-val">8,8%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 38%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">8. Villavicencio</span><span class="sector-val">9,1%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 40%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">9. Cali A.M.</span><span class="sector-val">9,3%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 41%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">10. Pasto</span><span class="sector-val">9,5%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 41%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">11. Montería</span><span class="sector-val">9,8%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 42%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">12. Barranquilla A.M.</span><span class="sector-val">10,1%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 44%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">13. Armenia</span><span class="sector-val">10,4%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 45%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">14. Ibagué</span><span class="sector-val">10,8%</span></div><div class="bar-track"><div class="bar-fill fill-gray" style="width: 47%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">15. Tunja</span><span class="sector-val">11,2%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 49%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">16. Neiva</span><span class="sector-val">11,5%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 50%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">17. Valledupar</span><span class="sector-val">11,9%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 52%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">18. Cúcuta A.M.</span><span class="sector-val">12,2%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 53%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">19. Sincelejo</span><span class="sector-val">12,8%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 55%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">20. Florencia</span><span class="sector-val">13,1%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 57%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">21. Cartagena</span><span class="sector-val">13,6%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 59%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">22. Riohacha</span><span class="sector-val">14,2%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 62%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">23. Quibdó</span><span class="sector-val">23,0%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 100%;"></div></div></div>
+      </div>
+    </div>
+
+    <!-- DIA 6: INFORMALIDAD (DESGLOSE TERRITORIAL COMPLETO) -->
+    <div id="t6" style="display:none">
+      <div class="section-title">Tasa de Informalidad por Dominios Geográficos</div>
+      <div class="sector-list">
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">Bogotá D.C.</span><span class="sector-val">32,6%</span></div><div class="bar-track"><div class="bar-fill fill-green" style="width: 39%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">13 Ciudades y Áreas Metropolitanas</span><span class="sector-val">40,5%</span></div><div class="bar-track"><div class="bar-fill fill-blue" style="width: 49%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">23 Ciudades y Áreas Metropolitanas</span><span class="sector-val">42,1%</span></div><div class="bar-track"><div class="bar-fill fill-blue" style="width: 51%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">Total Nacional</span><span class="sector-val">54,5%</span></div><div class="bar-track"><div class="bar-fill fill-blue" style="width: 66%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">Otras Cabeceras Municipales</span><span class="sector-val">62,8%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 76%;"></div></div></div>
+        <div class="sector-item"><div class="sector-head"><span class="sector-name">Centros Poblados y Rural Disperso</span><span class="sector-val">82,5%</span></div><div class="bar-track"><div class="bar-fill fill-red" style="width: 100%;"></div></div></div>
+      </div>
+    </div>
+
+    <!-- DIA 7: JÓVENES -->
+    <div id="t7" style="display:none">
+      <div class="section-title">Indicadores Mercado Juvenil (15-28 Años)</div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-val">14,1%</div>
+          <div class="kpi-lbl">Desempleo Joven</div>
+          <div class="badge bg-green">-0,9 p.p. vs 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-val">47,9%</div>
+          <div class="kpi-lbl">Tasa Ocupación</div>
+          <div class="badge bg-green">+1,3 p.p. vs 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Fuente oficial: GEIH - DANE</span>
+      <span>Julio 2026</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function switchTab(id, el) {
+  var tabs = ['t1', 't2', 't3', 't4', 't5', 't6', 't7'];
+  tabs.forEach(function(t) {
+    document.getElementById(t).style.display = 'none';
+  });
+  
+  var btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(function(b) {
+    b.classList.remove('active');
+  });
+  
+  document.getElementById(id).style.display = 'block';
+  el.classList.add('active');
+}
+</script>
+
+</body>
+</html>
