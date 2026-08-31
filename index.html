@@ -14,8 +14,42 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
 .header h1{color:#fff;font-size:16px;font-weight:700}
 .header p{color:rgba(255,255,255,.8);font-size:12px;margin-top:2px}
 
+/* Contenedor y señalización de pestañas */
+.tabs-container {
+  position: relative;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+.tabs-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, rgba(248,249,250,0), rgba(248,249,250,1));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  pointer-events: none;
+  color: #c8102e;
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+.tabs-indicator.hidden {
+  opacity: 0;
+}
+.tabs-indicator span {
+  animation: bounceRight 1.5s infinite;
+}
+@keyframes bounceRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
 /* Navegación por pestañas */
-.tabs-nav{display:flex;overflow-x:auto;background:#f8f9fa;border-bottom:1px solid #e9ecef;scrollbar-width:none}
+.tabs-nav{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .tabs-nav::-webkit-scrollbar{display:none}
 .tab-btn{flex:0 0 auto;padding:12px 14px;font-size:11px;font-weight:600;color:#6c757d;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
 .tab-btn.active{color:#c8102e;border-bottom-color:#c8102e;background:#fff}
@@ -64,19 +98,23 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
     <p>Resumen visual basado en las diapositivas DANE (Julio 2026)</p>
   </div>
 
-  <div class="tabs-nav">
-    <button class="tab-btn active" onclick="switchTab('t1', this)">1. Tasas</button>
-    <button class="tab-btn" onclick="switchTab('t2', this)">2. Población</button>
-    <button class="tab-btn" onclick="switchTab('t3', this)">3. Sectores</button>
-    <button class="tab-btn" onclick="switchTab('t4', this)">4. Género</button>
-    <button class="tab-btn" onclick="switchTab('t5', this)">5. Ciudades</button>
-    <button class="tab-btn" onclick="switchTab('t6', this)">6. Informalidad</button>
-    <button class="tab-btn" onclick="switchTab('t7', this)">7. Jóvenes</button>
+  <div class="tabs-container">
+    <div class="tabs-nav" id="tabsNav" onscroll="checkScroll()">
+      <button class="tab-btn active" onclick="switchTab('t1', this)">1. Tasas</button>
+      <button class="tab-btn" onclick="switchTab('t2', this)">2. Población</button>
+      <button class="tab-btn" onclick="switchTab('t3', this)">3. Sectores</button>
+      <button class="tab-btn" onclick="switchTab('t4', this)">4. Género</button>
+      <button class="tab-btn" onclick="switchTab('t5', this)">5. Ciudades</button>
+      <button class="tab-btn" onclick="switchTab('t6', this)">6. Informalidad</button>
+      <button class="tab-btn" onclick="switchTab('t7', this)">7. Jóvenes</button>
+    </div>
+    <div class="tabs-indicator" id="tabsIndicator">
+      <span>❯</span>
+    </div>
   </div>
 
   <div class="body">
 
-    <!-- DIA 1: TASAS NACIONALES -->
     <div id="t1">
       <div class="section-title">Evolución de la Tasa de Desempleo (Julio)</div>
       <div class="kpi-row">
@@ -112,7 +150,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 2: POBLACIÓN -->
     <div id="t2" style="display:none">
       <div class="section-title">Distribución de la Población (en miles)</div>
       <div class="sector-list">
@@ -131,7 +168,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 3: SECTORES -->
     <div id="t3" style="display:none">
       <div class="section-title">Variación de Ocupados por Sector (en miles)</div>
       <div class="sector-list">
@@ -190,7 +226,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 4: GÉNERO -->
     <div id="t4" style="display:none">
       <div class="section-title">Nuevos Ocupados por Género (en miles)</div>
       <div class="gender-grid">
@@ -207,7 +242,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 5: CIUDADES (LISTADO COMPLETO 23 ÁREAS) -->
     <div id="t5" style="display:none">
       <div class="section-title">Desempleo por Ciudades (Trimestre Mayo - Julio 2026)</div>
       <div class="sector-list">
@@ -237,7 +271,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 6: INFORMALIDAD (DESGLOSE TERRITORIAL COMPLETO) -->
     <div id="t6" style="display:none">
       <div class="section-title">Tasa de Informalidad por Dominios Geográficos</div>
       <div class="sector-list">
@@ -250,7 +283,6 @@ body{font-family:'Inter',sans-serif;background:#f0f2f5;min-height:100vh;padding:
       </div>
     </div>
 
-    <!-- DIA 7: JÓVENES -->
     <div id="t7" style="display:none">
       <div class="section-title">Indicadores Mercado Juvenil (15-28 Años)</div>
       <div class="kpi-row">
@@ -290,6 +322,21 @@ function switchTab(id, el) {
   document.getElementById(id).style.display = 'block';
   el.classList.add('active');
 }
+
+function checkScroll() {
+  var nav = document.getElementById('tabsNav');
+  var indicator = document.getElementById('tabsIndicator');
+  
+  // Ocultar si está cerca del final del scroll (margen de 5px)
+  if (nav.scrollWidth - nav.scrollLeft <= nav.clientWidth + 5) {
+    indicator.classList.add('hidden');
+  } else {
+    indicator.classList.remove('hidden');
+  }
+}
+
+// Comprobar scroll en carga inicial
+document.addEventListener('DOMContentLoaded', checkScroll);
 </script>
 
 </body>
